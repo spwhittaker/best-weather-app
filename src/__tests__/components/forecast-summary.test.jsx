@@ -12,7 +12,7 @@ it('renders the date', () => {
         icon="mockIcon" />
     ))
 
-expect(wrapper.find('.forecast-summary_date').text()).toEqual('mockDate');
+expect(wrapper.find('.forecast-summary-_date').text()).toEqual('mockDate');
 });
 
 
