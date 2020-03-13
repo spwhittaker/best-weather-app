@@ -17,28 +17,10 @@ class App extends React.Component {
       location: {
         city: '',
         country: '',
-        searchText: ''
+        searchText: '',
       },
     };
     this.handleForecastSelect = this.handleForecastSelect.bind(this);
-  }
-
-  handleForecastSelect(date) {
-    this.setState({
-      selectedDate: date,
-    });
-  }
-  handleSubmit = (e,place) => {
-    e.preventDefault();
-    Axios.get(`https://mcr-codes-weather.herokuapp.com/forecast/?city=${place}`).then(response => {
-      this.setState({
-        forecasts: response.data.forecasts,
-        location: {
-          city: response.data.location.city,
-          country: response.data.location.country,
-        }
-      })
-    })
   }
 
   componentDidMount() {
@@ -48,11 +30,30 @@ class App extends React.Component {
         location: {
           city: response.data.location.city,
           country: response.data.location.country,
-        }
-      })
-    })
-
+        },
+      });
+    });
   }
+
+  handleSubmit = (e, place) => {
+    e.preventDefault();
+    Axios.get(`https://mcr-codes-weather.herokuapp.com/forecast/?city=${place}`).then(response => {
+      this.setState({
+        forecasts: response.data.forecasts,
+        location: {
+          city: response.data.location.city,
+          country: response.data.location.country,
+        },
+      });
+    });
+  };
+
+  handleForecastSelect(date) {
+    this.setState({
+      selectedDate: date,
+    });
+  }
+
   render() {
     const selectedForecast = this.state.forecasts.find(
       forecast => forecast.date === this.state.selectedDate,
@@ -60,7 +61,7 @@ class App extends React.Component {
     return (
       <div className="forecast">
         <LocationDetails city={this.state.location.city} country={this.state.location.country} />
-        <SearchForm onSubmit={this.handleSubmit}/>
+        <SearchForm onSubmit={this.handleSubmit} />
         <ForecastSummaries
           forecasts={this.state.forecasts}
           onForecastSelect={this.handleForecastSelect}

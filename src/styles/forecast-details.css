@@ -1,2 +1,11 @@
-.detailedForecast {border: "20px auto",
+.detailedForecast {
+  border: '20px auto';
+}
+
+.location-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  max-width: 400px;
+  margin: 10px auto;
 }
