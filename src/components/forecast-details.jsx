@@ -3,7 +3,27 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 import '../styles/forecast-details.css';
 
+const windDirections = {
+  n: 'North',
+  e: 'East',
+  s: 'South',
+  w: 'West',
+  ne: 'North-East',
+  nw: 'North-west',
+  se: 'South-east',
+  sw: 'South-west',
+  nne: 'North-north-east',
+  ene: 'East-north-east',
+  ese: 'East-south-east',
+  sse: 'South-south-east',
+  ssw: 'South-south-west',
+  wsw: 'West-south-west',
+  nnw: 'North-north-west',
+};
+
 const ForecastDetails = forecast => {
+  const verboseDirection = windDirections[forecast.forecast.wind.direction];
+  console.log(verboseDirection);
   return (
     <div className="detailedForecast">
       <div className="location-info">
@@ -25,7 +45,7 @@ const ForecastDetails = forecast => {
       <div className="location-info">
         {' '}
         <span className="windDirection">Wind Direction: </span>
-        <span>{forecast.forecast.wind.direction}</span>
+        <span>{verboseDirection}</span>
       </div>
       <div className="location-info">
         <span className="humidity">Humidity: </span>
